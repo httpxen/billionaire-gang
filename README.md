@@ -2,7 +2,7 @@
 
 A modern, cinematic, and responsive fan-made/personal project website inspired by **Billionaire Gang**. The site is designed to showcase BG's brand identity, latest YouTube content, creator profile, social links, and core influence network using a dark luxury theme with gold accents.
 
-![Billionaire Gang Website Preview](./public/preview.png)
+![Billionaire Gang Website Preview](./public/images/BG.jpg)
 
 ---
 
@@ -61,69 +61,6 @@ This project was built using:
 - **Tailwind CSS** – Utility-first styling
 - **Framer Motion** – Smooth animations and transitions
 - **Vercel** – Deployment and hosting
-
----
-
-## 📂 Project Structure
-
-```bash
-billionaire-gang/
-├── app/
-│   ├── page.tsx
-│   ├── layout.tsx
-│   └── globals.css
-├── components/
-│   ├── Hero.tsx
-│   ├── ContentLibrary.tsx
-│   ├── CreatorProfile.tsx
-│   ├── Preloader.tsx
-│   └── Navbar.tsx
-├── public/
-│   ├── images/
-│   └── preview.png
-├── package.json
-├── tailwind.config.ts
-├── tsconfig.json
-└── README.md
-```
-
-> Note: The structure may vary depending on the final project setup.
-
----
-
-## ⚙️ Installation and Setup
-
-Clone the repository:
-
-```bash
-git clone https://github.com/your-username/billionaire-gang.git
-```
-
-Go to the project folder:
-
-```bash
-cd billionaire-gang
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open the website in your browser:
-
-```bash
-http://localhost:3000
-```
-
----
 
 ## 🔗 Important Links
 
@@ -187,7 +124,7 @@ Brand inspiration and content references belong to **Billionaire Gang** and thei
 
 ## 👨‍💻 Developer
 
-Developed by **Luke Aguilar**
+Developed by **Xen**
 
 ---
 

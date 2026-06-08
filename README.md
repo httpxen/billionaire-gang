@@ -2,7 +2,7 @@
 
 A modern, cinematic, and responsive fan-made/personal project website inspired by **Billionaire Gang**. The site is designed to showcase BG's brand identity, latest YouTube content, creator profile, social links, and core influence network using a dark luxury theme with gold accents.
 
-![Billionaire Gang Website Preview](./public/images/BG.jpg)
+![Billionaire Gang Website Preview](./public/images/preview.png)
 
 ---
 

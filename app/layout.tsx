@@ -3,6 +3,8 @@ import { Inter, Playfair_Display, Bebas_Neue } from 'next/font/google';
 import './globals.css';
 import Preloader from '@/components/Preloader';
 import BackgroundMusic from '@/components/BackgroundMusic';
+import ScrollToTop from '@/components/Scrolltotop';
+import NavMenu from '@/components/NavMenu';
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -42,6 +44,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} ${bebas.variable} bg-black text-white overflow-x-hidden`}>
         <Preloader />
         <BackgroundMusic />
+        <ScrollToTop />
+        <NavMenu />
         {children}
       </body>
     </html>

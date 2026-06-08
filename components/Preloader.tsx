@@ -173,7 +173,7 @@ export default function Preloader() {
               transition={{ duration: 0.8, delay: 1.15, ease: 'easeOut' }}
               className="mt-3 font-serif text-3xl italic tracking-wide text-white sm:text-4xl md:text-5xl"
             >
-              Welcome BG
+              What's Up, BG!!!🔥
             </motion.div>
 
             {/* Loading bar */}

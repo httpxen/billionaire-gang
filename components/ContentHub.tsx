@@ -22,7 +22,6 @@ function YouTubeIcon({ size = 14 }: { size?: number }) {
       viewBox="0 0 256 180"
       fill="none"
     >
-      {/* Red bg only shown on non-hover; on hover parent bg is already red */}
       <rect width="256" height="180" rx="40" fill="currentColor" />
       <path fill="#fff" d="m102.421 128.06 66.328-38.418-66.328-38.418z" />
     </svg>
@@ -69,8 +68,10 @@ function VideoModal({
           </div>
 
           {/* ── Modal Footer ── */}
-          <div className="px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-            <div className="flex-1 min-w-0">
+          <div className="px-6 py-5 flex flex-col gap-4">
+
+            {/* Video meta */}
+            <div>
               <span className="text-[9px] font-bold tracking-[0.25em] uppercase text-[#D4AF37]">
                 {video.categoryTag}
               </span>
@@ -98,9 +99,24 @@ function VideoModal({
               </div>
             </div>
 
-            {/* Action buttons */}
-            <div className="flex items-center gap-3 flex-shrink-0">
-              {/* FIX: Modal YouTube button — ghost outline, solid red only on hover */}
+            {/* ── Like & Share Notice ── */}
+            <div className="flex items-start gap-3 bg-[#D4AF37]/[0.06] border border-[#D4AF37]/20 rounded-xl px-4 py-3">
+              <span className="text-xl leading-none flex-shrink-0 mt-0.5">❤️</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#D4AF37] mb-1">
+                  Enjoyed watching?
+                </p>
+                <p className="text-[11px] text-neutral-500 leading-relaxed">
+                  Since you can't like here,{' '}
+                  <span className="text-neutral-400 font-semibold">head to YouTube</span>{' '}
+                  to like &amp; share Thank You!
+                </p>
+              </div>
+            </div>
+
+            {/* ── Action Buttons ── */}
+            <div className="flex items-center gap-3 justify-end">
+              {/* Like on YouTube — ghost outline, solid red on hover */}
               <Link
                 href={`https://www.youtube.com/watch?v=${video.id}`}
                 target="_blank"
@@ -119,7 +135,7 @@ function VideoModal({
                     className="fill-white group-hover/yt:fill-[#FF0000]"
                   />
                 </svg>
-                YouTube
+                Like on YouTube
               </Link>
 
               <button
@@ -132,6 +148,7 @@ function VideoModal({
                 </svg>
               </button>
             </div>
+
           </div>
         </motion.div>
       </motion.div>
@@ -344,12 +361,7 @@ export default function ContentHub({ videos }: ContentHubProps) {
                         Watch Here
                       </button>
 
-                      {/*
-                        FIX: YouTube button
-                        - Default state: dark bg, red YT logo visible
-                        - Hover state: red bg, WHITE logo (was invisible before because logo was also red on red)
-                        - Solution: use `color` (currentColor) for the icon rect, white play arrow always
-                      */}
+                      {/* YouTube button */}
                       <Link
                         href={`https://www.youtube.com/watch?v=${video.id}`}
                         target="_blank"
@@ -365,13 +377,6 @@ export default function ContentHub({ videos }: ContentHubProps) {
                           transition-all duration-200
                         "
                       >
-                        {/*
-                          Icon strategy:
-                          - The rounded-rect background uses `currentColor`
-                            → red (#FF0000) on default, white on hover (text-white)
-                          - The play triangle is always the opposite: white on default, red on hover
-                            so it stays visible in both states
-                        */}
                         <svg
                           width="16"
                           height="11"
@@ -380,19 +385,7 @@ export default function ContentHub({ videos }: ContentHubProps) {
                           xmlns="http://www.w3.org/2000/svg"
                           className="flex-shrink-0"
                         >
-                          {/* Rounded rect — currentColor so it flips with text color */}
-                          <rect
-                            width="256"
-                            height="180"
-                            rx="40"
-                            fill="currentColor"
-                          />
-                          {/*
-                            Play triangle:
-                            default = white (contrast against red rect)
-                            hover   = #FF0000 (contrast against white rect on red bg)
-                            Using group-hover trick with Tailwind
-                          */}
+                          <rect width="256" height="180" rx="40" fill="currentColor" />
                           <path
                             d="m102.421 128.06 66.328-38.418-66.328-38.418z"
                             className="fill-white group-hover/yt:fill-[#FF0000]"
@@ -402,6 +395,7 @@ export default function ContentHub({ videos }: ContentHubProps) {
                       </Link>
 
                     </div>
+
                   </div>
                 </motion.div>
               ))}

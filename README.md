@@ -6,12 +6,6 @@ A modern, cinematic, and responsive fan-made/personal project website inspired b
 
 ---
 
-## 🚀 Live Demo
-
-**Website:** https://billionaire-gang.vercel.app
-
----
-
 ## 📌 About the Project
 
 This project is a personal web design and development build created for the **Billionaire Gang** brand concept. The website focuses on presenting BG as a premium creator group through strong typography, bold visuals, smooth animations, and a luxury-inspired black-and-gold interface.

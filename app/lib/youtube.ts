@@ -43,9 +43,7 @@ function formatNumber(num: number, isSubscriber = false): string {
 
 function detectCategory(title: string, description: string): string {
   const text = (title + ' ' + description).toLowerCase();
-  if (text.includes('giveaway')) return 'Giveaways';
   if (text.includes('challenge')) return 'Challenges';
-  if (text.includes('announcement') || text.includes('announce')) return 'Announcements';
   if (text.includes('vlog')) return 'Vlogs';
   return 'Vlogs';
 }

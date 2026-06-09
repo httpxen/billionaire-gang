@@ -21,11 +21,14 @@ export default async function Home() {
   const [latestVideo, channelStats, allVideos, rawMemberStats] = await Promise.all([
     getLatestVideo(),
     getChannelStats(),
-    getAllVideos(200),
+    getAllVideos(500),
     getMultipleChannelStats(channelIds),
   ]);
 
   const liveStats = rawMemberStats;
+
+  // ── Parse the real YouTube video count from channelStats (used in Hero only).
+  //    ContentHub now shows per-category counts instead.
 
   return (
     <main className="min-h-screen bg-black text-white">

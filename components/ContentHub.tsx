@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import type { VideoWithCategory } from '../app/lib/youtube';
 
-const FILTERS = ['All', 'Vlogs', 'Challenges', 'Announcements', 'Giveaways'];
+// ─── CHANGES: Removed 'All', default filter is now 'Vlogs' ───────────────────
+const FILTERS = ['Vlogs', 'Challenges'];
 const PAGE_SIZE = 9;
 
 interface ContentHubProps {
@@ -158,17 +159,17 @@ function VideoModal({
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function ContentHub({ videos }: ContentHubProps) {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState('Vlogs');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [activeVideo, setActiveVideo] = useState<VideoWithCategory | null>(null);
 
-  const filtered =
-    activeFilter === 'All'
-      ? videos
-      : videos.filter((v) => v.categoryTag === activeFilter);
+  const filtered = videos.filter((v) => v.categoryTag === activeFilter);
 
   const visible = filtered.slice(0, visibleCount);
   const remaining = filtered.length - visibleCount;
+
+  // ── Show the count of videos in the currently active filter/category
+  const displayCount = filtered.length;
 
   function handleFilterChange(filter: string) {
     setActiveFilter(filter);
@@ -217,13 +218,14 @@ export default function ContentHub({ videos }: ContentHubProps) {
               </h2>
             </div>
 
+            {/* ── Video count badge — shows real YouTube total ── */}
             <div className="flex items-center gap-2 bg-neutral-900/80 border border-neutral-800 backdrop-blur-md px-5 py-3 rounded-full self-start sm:self-auto">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4AF37] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4AF37]" />
               </span>
               <span className="text-xs font-semibold tracking-[0.2em] uppercase text-neutral-400">
-                {filtered.length} Videos
+                {displayCount.toLocaleString()} Videos
               </span>
             </div>
           </div>
@@ -287,7 +289,7 @@ export default function ContentHub({ videos }: ContentHubProps) {
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-neutral-900">
                           <svg className="w-12 h-12 text-neutral-700" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M21.582 6.186a2.506 2.506 0 0 0-1.765-1.769C18.265 4 12 4 12 4s-6.265 0-7.817.417A2.506 2.506 0 0 0 2.418 6.186 26.142 26.142 0 0 0 2 12a26.142 26.142 0 0 0 .418 5.814 2.506 2.506 0 0 0 1.765 1.769C5.735 20 12 20 12 20s6.265 0 7.817-.417a2.506 2.506 0 0 0 1.765-1.769A26.142 26.142 0 0 0 22 12a26.142 26.142 0 0 0-.418-5.814z"/>
+                            <path d="M21.582 6.186a2.506 2.506 0 0 0-1.765-1.769C18.265 4 12 4 12 4s-6.265 0-7.817.417A2.506 2.506 0 0 0 2.418 6.186 2.506 2.506 0 0 0 2 12a26.142 26.142 0 0 0 .418 5.814 2.506 2.506 0 0 0 1.765 1.769C5.735 20 12 20 12 20s6.265 0 7.817-.417a2.506 2.506 0 0 0 1.765-1.769A26.142 26.142 0 0 0 22 12a26.142 26.142 0 0 0-.418-5.814z"/>
                             <polygon fill="#0A0A0A" points="9.954,15.196 15.581,12 9.954,8.804"/>
                           </svg>
                         </div>

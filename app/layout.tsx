@@ -5,6 +5,7 @@ import Preloader from '@/components/Preloader';
 import BackgroundMusic from '@/components/BackgroundMusic';
 import ScrollToTop from '@/components/Scrolltotop';
 import NavMenu from '@/components/NavMenu';
+import CustomCursor from '@/components/CustomCursor';
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${playfair.variable} ${bebas.variable} bg-black text-white overflow-x-hidden`}>
+        <CustomCursor />
         <Preloader />
         <BackgroundMusic />
         <ScrollToTop />

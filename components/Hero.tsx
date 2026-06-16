@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion'; // ← DAGDAG: Variants type
+import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRef, useState, useEffect, useCallback } from 'react';
@@ -25,8 +25,16 @@ interface HeroProps {
 
 // ─── Tracks Config ─────────────────────────────────────────────────────────────
 const TRACKS = [
-  { title: 'Billionaire Gang - Asiong De Luna (Prod By. Coco Beats)', src: 'music/background-music1.mp3' },
-  { title: 'Billionaire Gang Acoustic Version LYRICS Zarckaroo Gaming Musikero ng Billionaire Gang', src: 'music/background-music2.mp3' },
+  {
+    title: 'Billionaire Gang - Asiong De Luna (Prod By. Coco Beats)',
+    src: 'music/background-music1.mp3',
+    video: '/video/Billionaire Gang - Asiong De Luna.mp4',
+  },
+  {
+    title: 'Billionaire Gang Acoustic Version LYRICS Zarckaroo Gaming Musikero ng Billionaire Gang',
+    src: 'music/background-music2.mp3',
+    video: '/video/bgvideo.mp4',
+  },
 ];
 
 function fmt(s: number) {
@@ -50,6 +58,7 @@ interface SpotifyMiniPlayerProps {
   volume: number;
   onVolumeChange: (v: number) => void;
   onSeek: (pct: number) => void;
+  videoSrc: string | null;
 }
 
 function SpotifyMiniPlayer({
@@ -65,6 +74,7 @@ function SpotifyMiniPlayer({
   volume,
   onVolumeChange,
   onSeek,
+  videoSrc,
 }: SpotifyMiniPlayerProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
@@ -159,14 +169,28 @@ function SpotifyMiniPlayer({
           justifyContent: 'center',
           boxShadow: '0 16px 40px rgba(0,0,0,0.6)',
         }}>
-          <Image
-            src="/images/BG.jpg"
-            alt="Billionaire Gang"
-            width={352}
-            height={352}
-            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-            priority
-          />
+          {/* Video kapag nagpaplay at may videoSrc */}
+          {isPlaying && videoSrc ? (
+            <video
+              key={videoSrc}
+              src={videoSrc}
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '10px' }}
+            />
+          ) : (
+            <Image
+              src="/images/BG.jpg"
+              alt="Billionaire Gang"
+              width={352}
+              height={352}
+              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              priority
+            />
+          )}
+
           {isPlaying && (
             <div style={{
               position: 'absolute',
@@ -453,7 +477,6 @@ export default function Hero({ latestVideo, channelStats }: HeroProps) {
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
-  // ── FIX: Properly typed Variants ──────────────────────────────────────────
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -501,7 +524,8 @@ export default function Hero({ latestVideo, channelStats }: HeroProps) {
         <div className="w-[1px] h-full bg-neutral-800" />
       </div>
 
-      {/* Cinematic Background */}
+      {/* ORIGINAL IMAGE BACKGROUND - ibalik ito kapag ayaw mo ng video */}
+
       <div
         className="absolute inset-0 bg-[url('/images/hero-bg.jpg')] bg-cover bg-center opacity-30 mix-blend-luminosity filter contrast-125 brightness-75"
         style={{
@@ -509,6 +533,23 @@ export default function Hero({ latestVideo, channelStats }: HeroProps) {
           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0))',
         }}
       />
+      
+
+      {/* Cinematic Video Background */}
+      {/* <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity contrast-125 brightness-75"
+        style={{
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0))',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0))',
+        }}
+      >
+        <source src="/video/hero-bg.mp4" type="video/mp4" />
+      </video>
+      */}
 
       {/* ── SPOTIFY PLAYER — Right Side ── */}
       <motion.div
@@ -536,6 +577,7 @@ export default function Hero({ latestVideo, channelStats }: HeroProps) {
           volume={volume}
           onVolumeChange={handleVolume}
           onSeek={handleSeek}
+          videoSrc={TRACKS[currentIndex].video ?? null}
         />
       </motion.div>
 

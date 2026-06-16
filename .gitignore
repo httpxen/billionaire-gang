@@ -42,3 +42,25 @@ next-env.d.ts
 
 # local env files
 .env.local
+
+# media files - do not push to GitHub
+/public/video/
+/public/music/
+/public/images/
+
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+
+*.mp3
+*.wav
+*.aac
+*.flac
+
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp

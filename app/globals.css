@@ -25,3 +25,42 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+/* ===== Custom Cursor ===== */
+* {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 999999;
+  will-change: transform;
+}
+
+.custom-cursor__inner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  transition: scale 0.15s ease;
+}
+
+.custom-cursor__inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.custom-cursor__inner.is-pointer {
+  scale: 1.35;
+}
+
+.custom-cursor__inner.is-clicking {
+  scale: 0.85;
+}
